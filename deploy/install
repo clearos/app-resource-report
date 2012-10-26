@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Create report database
+/usr/sbin/initialize-report-tables resource /usr/clearos/apps/resource_report/deploy/db_tables.sql 

@@ -1,0 +1,1 @@
+*/5 * * * * root /usr/sbin/resource2db >/dev/null 2>&1

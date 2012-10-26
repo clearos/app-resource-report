@@ -5,8 +5,8 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'resource_report';
-$app['version'] = '5.9.9.4';
-$app['release'] = '1.1';
+$app['version'] = '1.4.1';
+$app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
 $app['license'] = 'GPLv3';
@@ -18,13 +18,23 @@ $app['description'] = lang('resource_report_app_description');
 /////////////////////////////////////////////////////////////////////////////
 
 $app['name'] = lang('resource_report_app_name');
-$app['category'] = lang('base_category_system');
-$app['subcategory'] = lang('base_subcategory_resources');
+$app['category'] = lang('base_category_reports');
+$app['subcategory'] = lang('base_category_system');
 
 /////////////////////////////////////////////////////////////////////////////
 // Packaging
 /////////////////////////////////////////////////////////////////////////////
 
 $app['core_requires'] = array(
-    'app-network-core', 
+    'app-reports-core',
+    'app-reports-database-core',
+    'app-tasks-core',
+);
+
+$app['core_file_manifest'] = array(
+    'app-resource-report.cron' => array( 'target' => '/etc/cron.d/app-resource-report'),
+    'resource2db' => array(
+        'target' => '/usr/sbin/resource2db',
+        'mode' => '0755',
+    ),
 );
