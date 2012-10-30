@@ -53,19 +53,11 @@ clearos_load_language('resource_report');
 // D E P E N D E N C I E S
 ///////////////////////////////////////////////////////////////////////////////
 
-// Classes
-//--------
-
 use \clearos\apps\base\Stats as Stats;
 use \clearos\apps\reports_database\Database_Report as Database_Report;
 
 clearos_load_library('base/Stats');
 clearos_load_library('reports_database/Database_Report');
-
-// Exceptions
-//-----------
-
-use \Exception as Exception;
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
@@ -171,8 +163,8 @@ class Resource_Report extends Database_Report
 
         $entries = $this->_run_query('resource', $sql, $options);
 
-        // Format report data
-        //-------------------
+        // Parse report data
+        //------------------
 
         $info = $this->get_report_info('memory');
 
@@ -180,15 +172,88 @@ class Resource_Report extends Database_Report
         $report_data['header'] = $info['headers'];
         $report_data['type'] = $info['types'];
 
+        $megabytes = 1024;
+
         foreach ($entries as $entry) {
             $report_data['data'][] = array(
                 $entry['timestamp'], 
-                (float) $entry['memory_kernel'],
-                (float) $entry['memory_buffers'],
-                (float) $entry['memory_cached'],
-                (float) $entry['memory_free']
+                (int) round($entry['memory_kernel'] / $megabytes),
+                (int) round($entry['memory_buffers'] / $megabytes),
+                (int) round($entry['memory_cached'] / $megabytes),
+                (int) round($entry['memory_free'] / $megabytes)
             );
         }
+
+        // Add format information
+        //-----------------------
+
+        $total = $entry['memory_kernel'] + $entry['memory_buffers'] + $entry['memory_cached'] + $entry['memory_free']; 
+        $series_max = ceil($total / $megabytes / $megabytes) * 1000;
+
+        $report_data['format'] = array(
+            'series_max' => $series_max,
+            'series_units' => lang('base_megabytes'),
+            'baseline_units' => 'timestamp',
+            'baseline_label' => lang('base_date')
+        );
+
+        return $report_data;
+    }
+
+    /**
+     * Returns swap memory summary data.
+     *
+     * @return array swap memory summary data
+     * @throws Engine_Exception
+     */
+
+    public function get_swap_data($range = 'today', $records = NULL)
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        // Get report data
+        //----------------
+
+        $sql['select'] = 'swap_free, swap_used, timestamp';
+        $sql['from'] = 'resource';
+        $sql['where'] = 'swap_free IS NOT NULL';
+        $sql['group_by'] = '';
+        $sql['order_by'] = 'timestamp DESC';
+
+        $options['range'] = $range;
+        $options['cache_time'] = 0; // FIXME: no cache for testing
+
+        $entries = $this->_run_query('resource', $sql, $options);
+
+        // Format report data
+        //-------------------
+
+        $info = $this->get_report_info('swap');
+
+        $report_data = array();
+        $report_data['header'] = $info['headers'];
+        $report_data['type'] = $info['types'];
+
+        $megabytes = 1024;
+
+        foreach ($entries as $entry) {
+            $report_data['data'][] = array(
+                $entry['timestamp'], 
+                (int) round($entry['swap_free'] / $megabytes),
+                (int) round($entry['swap_used'] / $megabytes)
+            );
+        }
+
+        // Add format information
+        //-----------------------
+
+        $total = $entry['swap_free'] + $entry['swap_used'];
+        $series_max = ceil($total / 1000000) * 1000;
+
+        $report_data['format'] = array(
+            'series_max' => $series_max,
+            'series_units' => lang('base_megabytes'),
+        );
 
         return $report_data;
     }
@@ -226,19 +291,26 @@ class Resource_Report extends Database_Report
         $report_data = array();
         $report_data['header'] = $info['headers'];
         $report_data['type'] = $info['types'];
+        $days = 60 * 60 * 24;
 
         foreach ($entries as $entry) {
             $report_data['data'][] = array(
                 $entry['timestamp'], 
-                (int) $entry['uptime'],
-                (int) $entry['uptime_idle']
+                (float) sprintf('%.2f', $entry['uptime']/$days),
+                (float) sprintf('%.2f', $entry['uptime_idle']/$days)
             );
         }
+
+        // Add format information
+        //-----------------------
+
+        $report_data['format'] = array(
+            'series_units' => lang('base_days'),
+        );
 
         return $report_data;
     }
 
-    /**
     /**
      * Returns processes summary data.
      *
@@ -285,9 +357,9 @@ class Resource_Report extends Database_Report
     }
 
     /**
-     * Returns load summary data.
+     * Inserts resource data into databasel.
      *
-     * @return array load summary data
+     * @return void
      * @throws Engine_Exception
      */
 
@@ -297,21 +369,18 @@ class Resource_Report extends Database_Report
 
         $stats = new Stats();
 
-        // Load averages
-        //---------------
+        // Get stats
+        //----------
 
-        try {
-            $load_averages = $stats->get_load_averages();
-            $uptimes = $stats->get_uptimes();
-            $memory_stats = $stats->get_memory_stats();
-            $process_stats = $stats->get_process_stats();
-        } catch (Exception $e) {
-        }
+        $load_averages = $stats->get_load_averages();
+        $uptimes = $stats->get_uptimes();
+        $memory_stats = $stats->get_memory_stats();
+        $process_stats = $stats->get_process_stats();
 
         // Insert report data
         //----------------
 
-        $sql['insert'] = "resource (`load_1min`, `load_5min`, `load_15min`, `processes_total`, `processes_running`, `memory_free`, `memory_cached`, `memory_buffers`, `memory_kernel`, `uptime`, `uptime_idle`)";
+        $sql['insert'] = "resource (`load_1min`, `load_5min`, `load_15min`, `processes_total`, `processes_running`, `memory_free`, `memory_cached`, `memory_buffers`, `memory_kernel`, `swap_free`, `swap_used`, `uptime`, `uptime_idle`)";
 
         $sql['values'] = 
             $load_averages['one'] . ',' .
@@ -323,6 +392,8 @@ class Resource_Report extends Database_Report
             $memory_stats['cached'] . ',' .
             $memory_stats['buffers'] . ',' .
             $memory_stats['kernel_and_apps'] . ',' .
+            $memory_stats['swap_free'] . ',' .
+            $memory_stats['swap_used'] . ',' .
             $uptimes['uptime'] . ',' .
             $uptimes['idle']
         ;
@@ -393,12 +464,35 @@ class Resource_Report extends Database_Report
                 lang('base_kernel_and_apps'),
                 lang('base_buffers'),
                 lang('base_cached'),
-                lang('base_free')
+                lang('base_free'),
             ),
             'types' => array(
                 'timestamp',
                 'int',
                 'int',
+                'int',
+                'int'
+            ),
+        );
+
+        // Swap Memory
+        //------------
+
+        $reports['swap'] = array(
+            'title' => lang('base_swap_memory'),
+            'method' => 'get_swap_data',
+            'app' => 'resource_report',
+            'url' => 'resource_report/swap/index/full',
+            'report' => 'swap',
+            'chart_type' => 'line_stack',
+            'library' => 'Resource_Report',
+            'headers' => array(
+                lang('base_date'),
+                lang('base_swap_memory_free'),
+                lang('base_swap_memory_used')
+            ),
+            'types' => array(
+                'timestamp',
                 'int',
                 'int'
             ),
@@ -445,14 +539,10 @@ class Resource_Report extends Database_Report
             ),
             'types' => array(
                 'timestamp',
-                'int',
-                'int'
+                'float',
+                'float'
             ),
         );
-
-        // Done
-        //-----
-
 
         // Done
         //-----

@@ -10,6 +10,8 @@ CREATE TABLE `resource` (
     `memory_cached` bigint default NULL,
     `memory_buffers` bigint default NULL,
     `memory_kernel` bigint default NULL,
+    `swap_free` bigint default NULL,
+    `swap_used` bigint default NULL,
     `uptime` int default NULL,
     `uptime_idle` int default NULL,
     `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP,

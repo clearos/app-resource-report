@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Resource report controller.
+ * System swap memory report controller.
  *
  * @category   Apps
  * @package    Resource_Report
@@ -40,7 +40,7 @@ require_once clearos_app_base('reports') . '/controllers/report_factory.php';
 ///////////////////////////////////////////////////////////////////////////////
 
 /**
- * Resource report controller.
+ * System swap memory report controller.
  *
  * @category   Apps
  * @package    Resource_Report
@@ -51,7 +51,7 @@ require_once clearos_app_base('reports') . '/controllers/report_factory.php';
  * @link       http://www.clearfoundation.com/docs/developer/apps/resource_report/
  */
 
-class Resource_Report extends Report_Controller
+class Swap extends Report_Controller
 {
     /**
      * Constructor.
@@ -59,14 +59,6 @@ class Resource_Report extends Report_Controller
 
     function __construct()
     {
-        $reports = array(
-            'resource_report/system_load',
-            'resource_report/memory',
-            'resource_report/swap',
-            'resource_report/processes',
-            'resource_report/uptime'
-        );
-
-        parent::__construct('resource_report', 'Resource_Report', 'overview', $reports);
+        parent::__construct('resource_report', 'Resource_Report', 'swap');
     }
 }
