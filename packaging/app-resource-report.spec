@@ -19,8 +19,8 @@ Summary: Resource Report - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
-Requires: app-reports-core
-Requires: app-reports-database-core
+Requires: app-reports-core >= 1:1.4.1
+Requires: app-reports-database-core >= 1:1.4.1
 Requires: app-tasks-core
 
 %description core

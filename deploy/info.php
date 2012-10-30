@@ -26,8 +26,8 @@ $app['subcategory'] = lang('base_category_system');
 /////////////////////////////////////////////////////////////////////////////
 
 $app['core_requires'] = array(
-    'app-reports-core',
-    'app-reports-database-core',
+    'app-reports-core >= 1:1.4.1',
+    'app-reports-database-core >= 1:1.4.1',
     'app-tasks-core',
 );
 
