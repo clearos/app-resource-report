@@ -113,7 +113,6 @@ class Resource_Report extends Database_Report
         $sql['order_by'] = 'timestamp DESC';
 
         $options['range'] = $range;
-        $options['cache_time'] = 0; // FIXME: no cache for testing
 
         $entries = $this->_run_query('resource', $sql, $options);
 
@@ -159,7 +158,6 @@ class Resource_Report extends Database_Report
         $sql['order_by'] = 'timestamp DESC';
 
         $options['range'] = $range;
-        $options['cache_time'] = 0; // FIXME: no cache for testing
 
         $entries = $this->_run_query('resource', $sql, $options);
 
@@ -221,7 +219,6 @@ class Resource_Report extends Database_Report
         $sql['order_by'] = 'timestamp DESC';
 
         $options['range'] = $range;
-        $options['cache_time'] = 0; // FIXME: no cache for testing
 
         $entries = $this->_run_query('resource', $sql, $options);
 
@@ -279,7 +276,6 @@ class Resource_Report extends Database_Report
         $sql['order_by'] = 'timestamp DESC';
 
         $options['range'] = $range;
-        $options['cache_time'] = 0; // FIXME: no cache for testing
 
         $entries = $this->_run_query('resource', $sql, $options);
 
@@ -332,7 +328,6 @@ class Resource_Report extends Database_Report
         $sql['order_by'] = 'timestamp DESC';
 
         $options['range'] = $range;
-        $options['cache_time'] = 0; // FIXME: no cache for testing
 
         $entries = $this->_run_query('resource', $sql, $options);
 
