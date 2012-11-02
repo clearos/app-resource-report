@@ -59,14 +59,6 @@ class Resource_Report extends Report_Controller
 
     function __construct()
     {
-        $reports = array(
-            'resource_report/system_load',
-            'resource_report/memory',
-            'resource_report/swap',
-            'resource_report/processes',
-            'resource_report/uptime'
-        );
-
-        parent::__construct('resource_report', 'Resource_Report', 'overview', $reports);
+        parent::__construct('resource_report', 'Resource_Report');
     }
 }

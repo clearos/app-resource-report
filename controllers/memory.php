@@ -59,6 +59,6 @@ class Memory extends Report_Controller
 
     function __construct()
     {
-        parent::__construct('resource_report', 'Resource_Report', 'memory');
+        parent::__construct('resource_report', 'Resource_Report');
     }
 }

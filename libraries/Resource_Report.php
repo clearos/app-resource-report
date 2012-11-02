@@ -95,11 +95,13 @@ class Resource_Report extends Database_Report
     /**
      * Returns load summary data.
      *
+     * @param string $range range information
+     *
      * @return array load summary data
      * @throws Engine_Exception
      */
 
-    public function get_load_data($range = 'today', $records = NULL)
+    public function get_load_data($range = 'today')
     {
         clearos_profile(__METHOD__, __LINE__);
 
@@ -140,11 +142,13 @@ class Resource_Report extends Database_Report
     /**
      * Returns memory summary data.
      *
+     * @param string $range range information
+     *
      * @return array memory summary data
      * @throws Engine_Exception
      */
 
-    public function get_memory_data($range = 'today', $records = NULL)
+    public function get_memory_data($range = 'today')
     {
         clearos_profile(__METHOD__, __LINE__);
 
@@ -201,11 +205,13 @@ class Resource_Report extends Database_Report
     /**
      * Returns swap memory summary data.
      *
+     * @param string $range range information
+     *
      * @return array swap memory summary data
      * @throws Engine_Exception
      */
 
-    public function get_swap_data($range = 'today', $records = NULL)
+    public function get_swap_data($range = 'today')
     {
         clearos_profile(__METHOD__, __LINE__);
 
@@ -258,11 +264,13 @@ class Resource_Report extends Database_Report
     /**
      * Returns uptime summary data.
      *
+     * @param string $range range information
+     *
      * @return array uptime summary data
      * @throws Engine_Exception
      */
 
-    public function get_uptime_data($range = 'today', $records = NULL)
+    public function get_uptime_data($range = 'today')
     {
         clearos_profile(__METHOD__, __LINE__);
 
@@ -310,11 +318,13 @@ class Resource_Report extends Database_Report
     /**
      * Returns processes summary data.
      *
+     * @param string $range range information
+     *
      * @return array processes summary data
      * @throws Engine_Exception
      */
 
-    public function get_process_data($range = 'today', $records = NULL)
+    public function get_process_data($range = 'today')
     {
         clearos_profile(__METHOD__, __LINE__);
 
@@ -375,10 +385,13 @@ class Resource_Report extends Database_Report
         // Insert report data
         //----------------
 
-        $sql['insert'] = "resource (`load_1min`, `load_5min`, `load_15min`, `processes_total`, `processes_running`, `memory_free`, `memory_cached`, `memory_buffers`, `memory_kernel`, `swap_free`, `swap_used`, `uptime`, `uptime_idle`)";
+        $sql['insert'] 
+            = 'resource (`load_1min`, `load_5min`, `load_15min`, `processes_total`, `processes_running`, ' .
+            '`memory_free`, `memory_cached`, `memory_buffers`, `memory_kernel`, `swap_free`, `swap_used`, ' .
+            '`uptime`, `uptime_idle`)';
 
-        $sql['values'] = 
-            $load_averages['one'] . ',' .
+        $sql['values'] 
+            = $load_averages['one'] . ',' .
             $load_averages['five'] . ',' .
             $load_averages['fifteen'] . ',' .
             $process_stats['total'] . ',' .
@@ -408,27 +421,14 @@ class Resource_Report extends Database_Report
     
     protected function _get_definition()
     {
-        // Overview
-        //---------
-
-        $reports['overview'] = array(
-            'title' => lang('base_overview'),
-            'url' => 'resource_report',
-            'app' => 'resource_report',
-            'report' => 'overview',
-        );
-
         // System Load
         //------------
 
         $reports['system_load'] = array(
-            'title' => lang('base_system_load'),
-            'method' => 'get_load_data',
             'app' => 'resource_report',
-            'url' => 'resource_report/system_load/index/full',
-            'report' => 'system_load',
+            'title' => lang('base_system_load'),
+            'api_data' => 'get_load_data',
             'chart_type' => 'line',
-            'library' => 'Resource_Report',
             'headers' => array(
                 lang('base_date'),
                 lang('base_1_minute_load'),
@@ -447,13 +447,10 @@ class Resource_Report extends Database_Report
         //-------
 
         $reports['memory'] = array(
-            'title' => lang('base_memory'),
-            'method' => 'get_memory_data',
             'app' => 'resource_report',
-            'url' => 'resource_report/memory/index/full',
-            'report' => 'memory',
+            'title' => lang('base_memory'),
+            'api_data' => 'get_memory_data',
             'chart_type' => 'line_stack',
-            'library' => 'Resource_Report',
             'headers' => array(
                 lang('base_date'),
                 lang('base_kernel_and_apps'),
@@ -474,13 +471,10 @@ class Resource_Report extends Database_Report
         //------------
 
         $reports['swap'] = array(
-            'title' => lang('base_swap_memory'),
-            'method' => 'get_swap_data',
             'app' => 'resource_report',
-            'url' => 'resource_report/swap/index/full',
-            'report' => 'swap',
+            'title' => lang('base_swap_memory'),
+            'api_data' => 'get_swap_data',
             'chart_type' => 'line_stack',
-            'library' => 'Resource_Report',
             'headers' => array(
                 lang('base_date'),
                 lang('base_swap_memory_free'),
@@ -497,13 +491,10 @@ class Resource_Report extends Database_Report
         //----------
 
         $reports['processes'] = array(
-            'title' => lang('base_processes'),
-            'method' => 'get_process_data',
             'app' => 'resource_report',
-            'url' => 'resource_report/processes/index/full',
-            'report' => 'processes',
+            'title' => lang('base_processes'),
+            'api_data' => 'get_process_data',
             'chart_type' => 'line',
-            'library' => 'Resource_Report',
             'headers' => array(
                 lang('base_date'),
                 lang('base_processes'),
@@ -520,13 +511,10 @@ class Resource_Report extends Database_Report
         //-------
 
         $reports['uptime'] = array(
-            'title' => lang('base_uptime'),
-            'method' => 'get_uptime_data',
             'app' => 'resource_report',
-            'url' => 'resource_report/uptime/index/full',
-            'report' => 'uptime',
+            'title' => lang('base_uptime'),
+            'api_data' => 'get_uptime_data',
             'chart_type' => 'line',
-            'library' => 'Resource_Report',
             'headers' => array(
                 lang('base_date'),
                 lang('base_uptime'),

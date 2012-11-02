@@ -59,6 +59,6 @@ class Processes extends Report_Controller
 
     function __construct()
     {
-        parent::__construct('resource_report', 'Resource_Report', 'processes');
+        parent::__construct('resource_report', 'Resource_Report');
     }
 }

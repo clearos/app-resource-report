@@ -59,6 +59,6 @@ class System_Load extends Report_Controller
 
     function __construct()
     {
-        parent::__construct('resource_report', 'Resource_Report', 'system_load');
+        parent::__construct('resource_report', 'Resource_Report');
     }
 }

@@ -59,6 +59,6 @@ class Swap extends Report_Controller
 
     function __construct()
     {
-        parent::__construct('resource_report', 'Resource_Report', 'swap');
+        parent::__construct('resource_report', 'Resource_Report');
     }
 }
