@@ -108,11 +108,8 @@ class Resource_Report extends Database_Report
         // Get report data
         //----------------
 
-        $sql['select'] = 'load_1min, load_5min, load_15min, timestamp';
-        $sql['from'] = 'resource';
-        $sql['where'] = 'load_1min IS NOT NULL';
-        $sql['group_by'] = '';
-        $sql['order_by'] = 'timestamp DESC';
+        $sql['timeline_select'] = array('load_1min', 'load_5min', 'load_15min');
+        $sql['timeline_from'] = 'resource';
 
         $options['range'] = $range;
 
@@ -155,11 +152,8 @@ class Resource_Report extends Database_Report
         // Get report data
         //----------------
 
-        $sql['select'] = 'memory_free, memory_cached, memory_buffers, memory_kernel, timestamp';
-        $sql['from'] = 'resource';
-        $sql['where'] = 'memory_free IS NOT NULL';
-        $sql['group_by'] = '';
-        $sql['order_by'] = 'timestamp DESC';
+        $sql['timeline_select'] = array('memory_free', 'memory_cached', 'memory_buffers', 'memory_kernel');
+        $sql['timeline_from'] = 'resource';
 
         $options['range'] = $range;
 
@@ -218,11 +212,8 @@ class Resource_Report extends Database_Report
         // Get report data
         //----------------
 
-        $sql['select'] = 'swap_free, swap_used, timestamp';
-        $sql['from'] = 'resource';
-        $sql['where'] = 'swap_free IS NOT NULL';
-        $sql['group_by'] = '';
-        $sql['order_by'] = 'timestamp DESC';
+        $sql['timeline_select'] = array('swap_free', 'swap_used');
+        $sql['timeline_from'] = 'resource';
 
         $options['range'] = $range;
 
@@ -277,11 +268,8 @@ class Resource_Report extends Database_Report
         // Get report data
         //----------------
 
-        $sql['select'] = 'uptime, uptime_idle, timestamp';
-        $sql['from'] = 'resource';
-        $sql['where'] = 'uptime IS NOT NULL';
-        $sql['group_by'] = '';
-        $sql['order_by'] = 'timestamp DESC';
+        $sql['timeline_select'] = array('uptime', 'uptime_idle');
+        $sql['timeline_from'] = 'resource';
 
         $options['range'] = $range;
 
@@ -331,11 +319,8 @@ class Resource_Report extends Database_Report
         // Get report data
         //----------------
 
-        $sql['select'] = 'processes_total, processes_running, timestamp';
-        $sql['from'] = 'resource';
-        $sql['where'] = 'processes_total IS NOT NULL';
-        $sql['group_by'] = '';
-        $sql['order_by'] = 'timestamp DESC';
+        $sql['timeline_select'] = array('processes_total', 'processes_running');
+        $sql['timeline_from'] = 'resource';
 
         $options['range'] = $range;
 
@@ -428,7 +413,7 @@ class Resource_Report extends Database_Report
             'app' => 'resource_report',
             'title' => lang('base_system_load'),
             'api_data' => 'get_load_data',
-            'chart_type' => 'line',
+            'chart_type' => 'timeline',
             'headers' => array(
                 lang('base_date'),
                 lang('base_1_minute_load'),
@@ -450,7 +435,7 @@ class Resource_Report extends Database_Report
             'app' => 'resource_report',
             'title' => lang('base_memory'),
             'api_data' => 'get_memory_data',
-            'chart_type' => 'line_stack',
+            'chart_type' => 'timeline_stack',
             'headers' => array(
                 lang('base_date'),
                 lang('base_kernel_and_apps'),
@@ -474,7 +459,7 @@ class Resource_Report extends Database_Report
             'app' => 'resource_report',
             'title' => lang('base_swap_memory'),
             'api_data' => 'get_swap_data',
-            'chart_type' => 'line_stack',
+            'chart_type' => 'timeline_stack',
             'headers' => array(
                 lang('base_date'),
                 lang('base_swap_memory_free'),
@@ -494,7 +479,7 @@ class Resource_Report extends Database_Report
             'app' => 'resource_report',
             'title' => lang('base_processes'),
             'api_data' => 'get_process_data',
-            'chart_type' => 'line',
+            'chart_type' => 'timeline',
             'headers' => array(
                 lang('base_date'),
                 lang('base_processes'),
@@ -507,14 +492,14 @@ class Resource_Report extends Database_Report
             ),
         );
 
-        // Update
+        // Uptime
         //-------
 
         $reports['uptime'] = array(
             'app' => 'resource_report',
             'title' => lang('base_uptime'),
             'api_data' => 'get_uptime_data',
-            'chart_type' => 'line',
+            'chart_type' => 'timeline',
             'headers' => array(
                 lang('base_date'),
                 lang('base_uptime'),
