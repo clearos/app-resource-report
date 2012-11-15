@@ -118,11 +118,7 @@ class Resource_Report extends Database_Report
         // Format report data
         //-------------------
 
-        $info = $this->get_report_info('system_load');
-
-        $report_data = array();
-        $report_data['header'] = $info['headers'];
-        $report_data['type'] = $info['types'];
+        $report_data = $this->_get_data_info('system_load');
 
         foreach ($entries as $entry) {
             $report_data['data'][] = array(
@@ -162,11 +158,7 @@ class Resource_Report extends Database_Report
         // Parse report data
         //------------------
 
-        $info = $this->get_report_info('memory');
-
-        $report_data = array();
-        $report_data['header'] = $info['headers'];
-        $report_data['type'] = $info['types'];
+        $report_data = $this->_get_data_info('memory');
 
         $megabytes = 1024;
 
@@ -222,11 +214,7 @@ class Resource_Report extends Database_Report
         // Format report data
         //-------------------
 
-        $info = $this->get_report_info('swap');
-
-        $report_data = array();
-        $report_data['header'] = $info['headers'];
-        $report_data['type'] = $info['types'];
+        $report_data = $this->_get_data_info('swap');
 
         $megabytes = 1024;
 
@@ -278,11 +266,8 @@ class Resource_Report extends Database_Report
         // Format report data
         //-------------------
 
-        $info = $this->get_report_info('uptime');
+        $report_data = $this->_get_data_info('uptime');
 
-        $report_data = array();
-        $report_data['header'] = $info['headers'];
-        $report_data['type'] = $info['types'];
         $days = 60 * 60 * 24;
 
         foreach ($entries as $entry) {
@@ -329,11 +314,7 @@ class Resource_Report extends Database_Report
         // Format report data
         //-------------------
 
-        $info = $this->get_report_info('processes');
-
-        $report_data = array();
-        $report_data['header'] = $info['headers'];
-        $report_data['type'] = $info['types'];
+        $report_data = $this->_get_data_info('processes');
 
         foreach ($entries as $entry) {
             $report_data['data'][] = array(
