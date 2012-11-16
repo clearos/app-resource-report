@@ -178,12 +178,7 @@ class Resource_Report extends Database_Report
         $total = $entry['memory_kernel'] + $entry['memory_buffers'] + $entry['memory_cached'] + $entry['memory_free']; 
         $series_max = ceil($total / $megabytes / $megabytes) * 1000;
 
-        $report_data['format'] = array(
-            'series_max' => $series_max,
-            'series_units' => lang('base_megabytes'),
-            'baseline_units' => 'timestamp',
-            'baseline_label' => lang('base_date')
-        );
+        $report_data['format']['series_max'] = $series_max;
 
         return $report_data;
     }
@@ -232,10 +227,7 @@ class Resource_Report extends Database_Report
         $total = $entry['swap_free'] + $entry['swap_used'];
         $series_max = ceil($total / 1000000) * 1000;
 
-        $report_data['format'] = array(
-            'series_max' => $series_max,
-            'series_units' => lang('base_megabytes'),
-        );
+        $report_data['format']['series_max'] = $series_max;
 
         return $report_data;
     }
@@ -277,13 +269,6 @@ class Resource_Report extends Database_Report
                 (float) sprintf('%.2f', $entry['uptime_idle']/$days)
             );
         }
-
-        // Add format information
-        //-----------------------
-
-        $report_data['format'] = array(
-            'series_units' => lang('base_days'),
-        );
 
         return $report_data;
     }
@@ -395,6 +380,9 @@ class Resource_Report extends Database_Report
             'title' => lang('base_system_load'),
             'api_data' => 'get_load_data',
             'chart_type' => 'timeline',
+            'format' => array(
+                'baseline_format' => 'timestamp'
+            ),
             'headers' => array(
                 lang('base_date'),
                 lang('base_1_minute_load'),
@@ -417,6 +405,10 @@ class Resource_Report extends Database_Report
             'title' => lang('base_memory'),
             'api_data' => 'get_memory_data',
             'chart_type' => 'timeline_stack',
+            'format' => array(
+                'series_label' => lang('base_megabytes'),
+                'baseline_format' => 'timestamp'
+            ),
             'headers' => array(
                 lang('base_date'),
                 lang('base_kernel_and_apps'),
@@ -441,6 +433,10 @@ class Resource_Report extends Database_Report
             'title' => lang('base_swap_memory'),
             'api_data' => 'get_swap_data',
             'chart_type' => 'timeline_stack',
+            'format' => array(
+                'series_label' => lang('base_megabytes'),
+                'baseline_format' => 'timestamp'
+            ),
             'headers' => array(
                 lang('base_date'),
                 lang('base_swap_memory_free'),
@@ -461,6 +457,9 @@ class Resource_Report extends Database_Report
             'title' => lang('base_processes'),
             'api_data' => 'get_process_data',
             'chart_type' => 'timeline',
+            'format' => array(
+                'baseline_format' => 'timestamp'
+            ),
             'headers' => array(
                 lang('base_date'),
                 lang('base_processes'),
@@ -481,6 +480,10 @@ class Resource_Report extends Database_Report
             'title' => lang('base_uptime'),
             'api_data' => 'get_uptime_data',
             'chart_type' => 'timeline',
+            'format' => array(
+                'series_label' => lang('base_days'),
+                'baseline_format' => 'timestamp'
+            ),
             'headers' => array(
                 lang('base_date'),
                 lang('base_uptime'),
