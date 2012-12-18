@@ -1,7 +1,7 @@
 
 Name: app-resource-report
 Epoch: 1
-Version: 1.4.6
+Version: 1.4.8
 Release: 1%{dist}
 Summary: Resource Report
 License: GPLv3
@@ -20,7 +20,7 @@ License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
 Requires: app-reports-core >= 1:1.4.3
-Requires: app-reports-database-core >= 1:1.4.3
+Requires: app-reports-database-core >= 1:1.4.8
 Requires: app-tasks-core
 
 %description core
