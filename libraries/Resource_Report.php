@@ -170,15 +170,13 @@ class Resource_Report extends Database_Report
                 (int) round($entry['memory_cached'] / $megabytes),
                 (int) round($entry['memory_free'] / $megabytes)
             );
+            $total[] = round(($entry['memory_kernel'] + $entry['memory_buffers'] + $entry['memory_cached'] + $entry['memory_free']) / $megabytes);
         }
 
         // Add format information
         //-----------------------
 
-        $total = $entry['memory_kernel'] + $entry['memory_buffers'] + $entry['memory_cached'] + $entry['memory_free']; 
-        $series_max = ceil($total / $megabytes / $megabytes) * 1000;
-
-        $report_data['format']['series_max'] = $series_max;
+        $report_data['format']['series_max'] = ceil(max($total)/$megabytes) * 1000;
 
         return $report_data;
     }
