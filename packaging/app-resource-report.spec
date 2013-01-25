@@ -1,7 +1,7 @@
 
 Name: app-resource-report
 Epoch: 1
-Version: 1.4.8
+Version: 1.4.15
 Release: 1%{dist}
 Summary: Resource Report
 License: GPLv3
