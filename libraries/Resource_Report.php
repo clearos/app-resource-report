@@ -321,10 +321,15 @@ class Resource_Report extends Database_Report
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        $stats = new Stats();
+        // Initialize
+        //-----------
+
+        $this->_initialize_tables('resource_report', 'resource');
 
         // Get stats
         //----------
+
+        $stats = new Stats();
 
         $load_averages = $stats->get_load_averages();
         $uptimes = $stats->get_uptimes();
