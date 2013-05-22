@@ -3,9 +3,9 @@
 /**
  * Uptime report controller.
  *
- * @category   Apps
- * @package    Resource_Report
- * @subpackage Controllers
+ * @category   apps
+ * @package    resource-report
+ * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
@@ -42,9 +42,9 @@ require_once clearos_app_base('reports') . '/controllers/report_factory.php';
 /**
  * Uptime report controller.
  *
- * @category   Apps
- * @package    Resource_Report
- * @subpackage Controllers
+ * @category   apps
+ * @package    resource-report
+ * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later

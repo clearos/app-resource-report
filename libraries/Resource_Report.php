@@ -3,9 +3,9 @@
 /**
  * Resource report class.
  *
- * @category   Apps
- * @package    Resource_Report
- * @subpackage Libraries
+ * @category   apps
+ * @package    resource-report
+ * @subpackage libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later
@@ -66,9 +66,9 @@ clearos_load_library('reports_database/Database_Report');
 /**
  * Resource report class.
  *
- * @category   Apps
- * @package    Resource_Report
- * @subpackage Libraries
+ * @category   apps
+ * @package    resource-report
+ * @subpackage libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later

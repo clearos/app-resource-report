@@ -4,9 +4,9 @@
 /**
  * Database import tool for various resource data points.
  *
- * @category   Apps
- * @package    Resource_Report
- * @subpackage Scripts
+ * @category   apps
+ * @package    resource-report
+ * @subpackage scripts
  * @author     ClearCenter <developer@clearcenter.com>
  * @copyright  2012 ClearCenter
  * @license    http://www.clearcenter.com/app_license ClearCenter license
