@@ -384,7 +384,8 @@ class Resource_Report extends Database_Report
             'api_data' => 'get_load_data',
             'chart_type' => 'timeline',
             'format' => array(
-                'baseline_format' => 'timestamp'
+                'baseline_format' => 'timestamp',
+                'series_format' => '%#.1f'
             ),
             'headers' => array(
                 lang('base_date'),
