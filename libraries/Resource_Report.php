@@ -509,7 +509,8 @@ class Resource_Report extends Database_Report
             'chart_type' => 'timeline',
             'format' => array(
                 'series_label' => lang('base_days'),
-                'baseline_format' => 'timestamp'
+                'baseline_format' => 'timestamp',
+                'series_format' => '%#.1f'
             ),
             'headers' => array(
                 lang('base_date'),
