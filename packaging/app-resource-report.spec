@@ -1,7 +1,7 @@
 
 Name: app-resource-report
 Epoch: 1
-Version: 1.5.6
+Version: 1.6.5
 Release: 1%{dist}
 Summary: Resource Report
 License: GPLv3
@@ -70,12 +70,10 @@ exit 0
 %defattr(-,root,root)
 /usr/clearos/apps/resource_report/controllers
 /usr/clearos/apps/resource_report/htdocs
-/usr/clearos/apps/resource_report/views
 
 %files core
 %defattr(-,root,root)
 %exclude /usr/clearos/apps/resource_report/packaging
-%exclude /usr/clearos/apps/resource_report/tests
 %dir /usr/clearos/apps/resource_report
 /usr/clearos/apps/resource_report/deploy
 /usr/clearos/apps/resource_report/language
