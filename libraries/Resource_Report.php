@@ -176,8 +176,6 @@ class Resource_Report extends Database_Report
         // Add format information
         //-----------------------
 
-        $report_data['format']['series_max'] = ceil(max($total)/$megabytes) * 1000;
-
         return $report_data;
     }
 
@@ -384,8 +382,7 @@ class Resource_Report extends Database_Report
             'api_data' => 'get_load_data',
             'chart_type' => 'timeline',
             'format' => array(
-                'baseline_format' => 'timestamp',
-                'series_format' => '%#.1f'
+                'yaxis_label' => lang('resource_report_load_average')
             ),
             'headers' => array(
                 lang('base_date'),
@@ -416,8 +413,7 @@ class Resource_Report extends Database_Report
             'api_data' => 'get_memory_data',
             'chart_type' => 'timeline_stack',
             'format' => array(
-                'series_label' => lang('base_megabytes'),
-                'baseline_format' => 'timestamp'
+                'yaxis_label' => lang('base_megabytes')
             ),
             'headers' => array(
                 lang('base_date'),
@@ -451,8 +447,7 @@ class Resource_Report extends Database_Report
             'api_data' => 'get_swap_data',
             'chart_type' => 'timeline_stack',
             'format' => array(
-                'series_label' => lang('base_megabytes'),
-                'baseline_format' => 'timestamp'
+                'yaxis_label' => lang('base_megabytes')
             ),
             'headers' => array(
                 lang('base_date'),
@@ -480,7 +475,7 @@ class Resource_Report extends Database_Report
             'api_data' => 'get_process_data',
             'chart_type' => 'timeline',
             'format' => array(
-                'baseline_format' => 'timestamp'
+                'yaxis_label' => lang('resource_report_number_of_processes')
             ),
             'headers' => array(
                 lang('base_date'),
@@ -508,9 +503,7 @@ class Resource_Report extends Database_Report
             'api_data' => 'get_uptime_data',
             'chart_type' => 'timeline',
             'format' => array(
-                'series_label' => lang('base_days'),
-                'baseline_format' => 'timestamp',
-                'series_format' => '%#.1f'
+                'yaxis_label' => lang('base_days')
             ),
             'headers' => array(
                 lang('base_date'),
