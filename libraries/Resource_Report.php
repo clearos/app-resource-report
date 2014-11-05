@@ -7,7 +7,7 @@
  * @package    resource-report
  * @subpackage libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2012-2013 ClearFoundation
+ * @copyright  2012-2014 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/resource_report/
  */
@@ -70,7 +70,7 @@ clearos_load_library('reports_database/Database_Report');
  * @package    resource-report
  * @subpackage libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2012-2013 ClearFoundation
+ * @copyright  2012-2014 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/resource_report/
  */
@@ -216,14 +216,6 @@ class Resource_Report extends Database_Report
                 (int) round($entry['swap_used'] / $megabytes)
             );
         }
-
-        // Add format information
-        //-----------------------
-
-        $total = $entry['swap_free'] + $entry['swap_used'];
-        $series_max = ceil($total / 1000000) * 1000;
-
-        $report_data['format']['series_max'] = $series_max;
 
         return $report_data;
     }
@@ -396,12 +388,6 @@ class Resource_Report extends Database_Report
                 'float',
                 'float'
             ),
-            'chart_series' => array(
-                FALSE,
-                TRUE,
-                TRUE,
-                TRUE
-            ),
         );
 
         // Memory
@@ -429,13 +415,6 @@ class Resource_Report extends Database_Report
                 'int',
                 'int'
             ),
-            'chart_series' => array(
-                FALSE,
-                TRUE,
-                TRUE,
-                TRUE,
-                TRUE
-            ),
         );
 
         // Swap Memory
@@ -458,11 +437,6 @@ class Resource_Report extends Database_Report
                 'timestamp',
                 'int',
                 'int'
-            ),
-            'chart_series' => array(
-                FALSE,
-                TRUE,
-                TRUE
             ),
         );
 
@@ -487,11 +461,6 @@ class Resource_Report extends Database_Report
                 'int',
                 'int'
             ),
-            'chart_series' => array(
-                FALSE,
-                TRUE,
-                TRUE
-            ),
         );
 
         // Uptime
@@ -514,11 +483,6 @@ class Resource_Report extends Database_Report
                 'timestamp',
                 'float',
                 'float'
-            ),
-            'chart_series' => array(
-                FALSE,
-                TRUE,
-                TRUE
             ),
         );
 
