@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'resource_report';
-$app['version'] = '2.0.5';
+$app['version'] = '2.0.14';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -19,7 +19,7 @@ $app['description'] = lang('resource_report_app_description');
 
 $app['name'] = lang('resource_report_app_name');
 $app['category'] = lang('base_category_reports');
-$app['subcategory'] = lang('base_category_system');
+$app['subcategory'] = lang('base_subcategory_performance_and_resources');
 
 /////////////////////////////////////////////////////////////////////////////
 // Packaging
