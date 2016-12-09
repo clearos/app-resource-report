@@ -27,7 +27,7 @@ $app['subcategory'] = lang('base_subcategory_performance_and_resources');
 
 $app['core_requires'] = array(
     'app-reports-core >= 1:1.4.70',
-    'app-reports-database-core >= 1:1.4.30',
+    'app-reports-database-core >= 1:2.3.0',
     'app-tasks-core',
 );
 
