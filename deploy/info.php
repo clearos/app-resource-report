@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'resource_report';
-$app['version'] = '2.1.7';
+$app['version'] = '2.3.0';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -20,21 +20,6 @@ $app['description'] = lang('resource_report_app_description');
 $app['name'] = lang('resource_report_app_name');
 $app['category'] = lang('base_category_reports');
 $app['subcategory'] = lang('base_subcategory_performance_and_resources');
-
-/////////////////////////////////////////////////////////////////////////////
-// Dashboard Widgets
-/////////////////////////////////////////////////////////////////////////////
-
-/*
-$app['dashboard_widgets'] = array(
-    $app['category'] => array(
-        'resource_report/memory/dashboard' => array(
-            'title' => lang('base_memory'),
-            'restricted' => FALSE,
-        )
-    )
-);
-*/
 
 /////////////////////////////////////////////////////////////////////////////
 // Packaging
