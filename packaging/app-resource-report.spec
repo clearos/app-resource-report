@@ -1,23 +1,26 @@
 
 Name: app-resource-report
 Epoch: 1
-Version: 2.3.0
+Version: 2.5.0
 Release: 1%{dist}
 Summary: Resource Report
 License: GPLv3
-Group: ClearOS/Apps
+Group: Applications/Apps
+Packager: ClearFoundation
+Vendor: ClearFoundation
 Source: %{name}-%{version}.tar.gz
 Buildarch: noarch
 Requires: %{name}-core = 1:%{version}-%{release}
 Requires: app-base
+Requires: app-reports
 
 %description
 The Resource Report includes information on load, memory usage and running processes.
 
 %package core
-Summary: Resource Report - Core
+Summary: Resource Report - API
 License: LGPLv3
-Group: ClearOS/Libraries
+Group: Applications/API
 Requires: app-base-core
 Requires: app-reports-core >= 1:1.4.70
 Requires: app-reports-database-core >= 1:2.3.0
@@ -74,6 +77,7 @@ exit 0
 %files core
 %defattr(-,root,root)
 %exclude /usr/clearos/apps/resource_report/packaging
+%exclude /usr/clearos/apps/resource_report/unify.json
 %dir /usr/clearos/apps/resource_report
 /usr/clearos/apps/resource_report/deploy
 /usr/clearos/apps/resource_report/language
